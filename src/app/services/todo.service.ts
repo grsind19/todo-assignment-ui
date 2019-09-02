@@ -5,9 +5,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class TodoService {
-  private heroesUrl = 'http://localhost:3000/api/todo/'
+  private heroesUrl = '/api/todo/'
   private httpOptions : any;
   constructor(private http: HttpClient) { 
+  }
+  create_headers(){
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
@@ -17,15 +19,19 @@ export class TodoService {
   }
 
   add_todo(todo){
+    this.create_headers()
     return this.http.post(this.heroesUrl, todo, this.httpOptions).toPromise()
   }
   update_todo(todo){
+    this.create_headers()
     return this.http.put(this.heroesUrl+todo.id, todo, this.httpOptions).toPromise()
   }
   delete_todo(todo){
+    this.create_headers()
     return this.http.delete(this.heroesUrl+todo.id,this.httpOptions).toPromise()
   }
   get_todos(){
+    this.create_headers()
     return this.http.get(this.heroesUrl,this.httpOptions).toPromise()
   }
 }

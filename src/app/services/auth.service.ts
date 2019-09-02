@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class AuthService {
-  private heroesUrl = 'http://localhost:3000/api/user/'
+  private heroesUrl = '/api/user/'
   constructor(private http: HttpClient) { }
 
   login(user):Promise<any>{

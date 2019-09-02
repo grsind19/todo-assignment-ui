@@ -15,11 +15,14 @@ export class TodoComponent implements OnInit {
   filtered_todos= [];
   todos_list: any;
   current_value:any;
+  user: any;
   constructor(private route: ActivatedRoute, 
     private toastr: ToastrService,
     private router: Router,
     private auth_service:AuthService,
     private todo_service: TodoService) {
+    
+    this.user = this.auth_service.get_user()
     
     this.route.params.subscribe(params => {
       if (params['element']) {

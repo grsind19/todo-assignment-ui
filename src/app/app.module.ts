@@ -14,6 +14,8 @@ import { TodoComponent } from './todo/todo.component';
 
 import {AuthGuardService} from './services/auth-guard.service'
 import { from } from 'rxjs';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +31,9 @@ import { from } from 'rxjs';
     BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
-  providers: [AuthGuardService],
+  providers: [AuthGuardService,
+  {provide:LocationStrategy,useClass:HashLocationStrategy}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
