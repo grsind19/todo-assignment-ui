@@ -1,0 +1,20 @@
+<form class="form-signin">
+    <div class="text-center mb-4">
+        <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+        <h1 class="h3 mb-3 font-weight-normal">Todo App</h1>
+        <p>Manage todo on the go </p>
+    </div>
+
+    <div class="form-label-group">
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus [(ngModel)]="user.email" [ngModelOptions]="{standalone: true}">
+        <label for="inputEmail">Email address</label>
+    </div>
+
+    <div class="form-label-group">
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required [(ngModel)]="user.password" [ngModelOptions]="{standalone: true}">
+        <label for="inputPassword">Password</label>
+    </div>
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="login()">Sign in</button>
+    <p class="mt-3 mb-2 text-muted">Are you a new user? <u><a routerLink="/signup">Sign up</a></u></p>
+</form>

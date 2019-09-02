@@ -1,0 +1,60 @@
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-4 bg-white border-bottom shadow-sm">
+    <h5 class="my-0 mr-md-auto font-weight-normal ">Mi Todos</h5>
+    <nav>
+        <a class="p-2 text-dark" href="#">Seetharaman</a>
+    </nav>
+
+    <a class="btn btn-outline-primary" (click)="logout()">Log out</a>
+</div>
+
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">Todos</h1>
+    <p class="lead">Manage your todo list with ease</p>
+</div>
+
+<div class="container">
+    <section class="todoapp">
+        <header class="header">
+            <input class="new-todo" placeholder="What needs to be done?" autofocus #box (keyup.enter)="addTodo(box.value);box.value=''">
+        </header>
+        <!-- This section should be hidden by default and shown when there are todos -->
+        <section class="main">
+            <input id="toggle-all" class="toggle-all" type="checkbox">
+            <label for="toggle-all">Mark all as complete</label>
+
+            
+
+            <ul class="todo-list">
+                <!-- These are here just to show the structure of the list items -->
+                <!-- List items should get the class `editing` when editing and `completed` when marked as completed -->
+                <li *ngFor="let todo of filtered_todos; index as i; trackBy: trackByFn" [ngClass]="{'completed': todo.completed}">
+                    <div class="view" [ngClass]="{'hide': todo.is_edit, 'hide': todo.is_edit}">
+                        <input class="toggle" type="checkbox" [(ngModel)]="todo.completed" (ngModelChange)="update_todo(todo)">
+                        <label (click)="make_editable(todo,edit_field)">{{todo.title}}</label>
+                        <button class="destroy" (click)=delete_todo(todo)></button>
+                    </div>
+                    <input #edit_field class="new-todo hide" [ngClass]="{'show': todo.is_edit, 'hide': !todo.is_edit}"  [(ngModel)]="todo.title"  (blur)="update_todo(todo)" autofocus>
+                </li>
+            </ul>
+        </section>
+        <!-- This footer should hidden by default and shown when there are todos -->
+        <footer class="footer">
+            <!-- This should be `0 items left` by default -->
+            <span class="todo-count"><strong>{{active_times()}}</strong> item left</span>
+            <!-- Remove this if you don't implement routing -->
+            <ul class="filters">
+                <li>
+                    <a  [ngClass]="{'selected': todo_list_type=='all'}" routerLink="/todo/all">All</a>
+                </li>
+                <li>
+                    <a [ngClass]="{'selected': todo_list_type=='active'}" routerLink="/todo/active">Active</a>
+                </li>
+                <li>
+                    <a [ngClass]="{'selected': todo_list_type=='completed'}" routerLink="/todo/completed">Completed</a>
+                </li>
+            </ul>
+            <!-- Hidden if no completed items are left ↓ -->
+            <button class="clear-completed" (click)="clear_completed()">Clear completed</button>
+        </footer>
+    </section>
+</div>
